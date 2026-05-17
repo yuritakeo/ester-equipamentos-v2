@@ -1,0 +1,124 @@
+.app-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  min-height: 100vh;
+  background: rgba(15, 23, 42, 0.42);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: overlayIn 0.22s ease-out;
+}
+
+.modal-box {
+  background: white;
+  padding: 40px 18px 26px;
+  border-radius: 14px;
+  width: min(92vw, var(--modal-max-w, 620px));
+  max-width: var(--modal-max-w, 620px);
+  max-height: min(88vh, var(--modal-max-h, 88vh));
+  overflow-y: auto;
+  min-width: 0;
+  position: relative;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.28);
+  animation: modalEnter 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10000;
+  margin: 0 8px;
+}
+
+.modal-box.modal-sm {
+  --modal-max-w: 420px;
+}
+
+.modal-box.modal-md {
+  --modal-max-w: 620px;
+}
+
+.modal-box.modal-lg {
+  --modal-max-w: 960px;
+}
+
+.modal-box.modal-xl {
+  --modal-max-w: 1220px;
+}
+
+.modal-box.checklist-viewer-modal {
+  margin-left: clamp(140px, 12vw, 240px);
+}
+
+.modal-close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  border: none;
+  background: transparent;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+@media (max-width: 640px) {
+  .app-modal-overlay {
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  .modal-box {
+    width: min(100vw, 620px);
+    max-width: min(100vw, 620px);
+    max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(10px, env(safe-area-inset-bottom)));
+    margin: 0;
+    border-radius: 22px;
+    padding: 34px 14px 20px;
+  }
+
+  .modal-box.modal-lg,
+  .modal-box.modal-xl,
+  .modal-box.modal-md,
+  .modal-box.modal-sm {
+    --modal-max-w: 100vw;
+  }
+
+  .modal-box.checklist-viewer-modal {
+    margin-left: 0;
+  }
+
+  .modal-close {
+    right: 10px;
+    top: 8px;
+  }
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalEnter {
+  from {
+    transform: translateY(14px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}

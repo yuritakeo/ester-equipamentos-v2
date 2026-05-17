@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: Backend
+
+  profiles:
+    active: dev-low
+
+  jackson:
+    time-zone: America/Sao_Paulo
+
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,text/plain,text/html,text/css,application/javascript

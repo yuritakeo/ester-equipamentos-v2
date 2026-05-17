@@ -1,0 +1,42 @@
+.cascade-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  position: relative;
+  z-index: 40;
+  overflow-x: auto;
+  padding: 8px 10px;
+  border: 1px solid #dce2eb;
+  border-radius: 10px;
+  background: #f7f8fa;
+}
+
+.cascade-filter-clear-all {
+  flex: 0 0 auto;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #e11d48;
+  border-radius: 6px;
+  background: #e11d48;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.cascade-filter-clear-all:hover {
+  background: #be123c;
+  border-color: #be123c;
+}
+
+.cascade-filter-select {
+  flex: 0 0 230px;
+  min-width: 230px;
+}
+
+.smart-select__menu-portal {
+  z-index: 9999;
+}

@@ -1,0 +1,3 @@
+ALTER TABLE equipamentosLocados
+ADD COLUMN IF NOT EXISTS foto_url TEXT,
+ADD COLUMN IF NOT EXISTS foto_url_2 TEXT;

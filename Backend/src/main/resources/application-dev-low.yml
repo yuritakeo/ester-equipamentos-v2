@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/checklist_nasr
+    username: postgres
+    password: postgres
+
+    hikari:
+      maximum-pool-size: 4
+      minimum-idle: 0
+
+  jpa:
+    hibernate:
+      ddl-auto: none   # ✅ CORREÇÃO AQUI | DEPOIS VOLTAR PARA 'none'
+    open-in-view: false
+
+
+
+server:
+  port: 8080
+
+  tomcat:
+    threads:
+      max: 20
+    accept-count: 20

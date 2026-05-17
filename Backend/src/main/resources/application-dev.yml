@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/checklist_nasr
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 60000
+      max-lifetime: 300000
+      keepalive-time: 0
+      connection-init-sql: SET TIME ZONE 'America/Sao_Paulo'
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: America/Sao_Paulo
+          fetch_size: 100
+        default_batch_fetch_size: 32
+
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 100
+    accept-count: 100
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# NOVA CONFIG DO FRONTEND
+app:
+  frontend:
+    url: http://localhost:5174

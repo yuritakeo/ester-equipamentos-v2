@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-test
+    restart: always
+
+    environment:
+      POSTGRES_DB: checklist_nasr
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: backend-test
+
+    depends_on:
+      - postgres
+
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+
+      JAVA_TOOL_OPTIONS: >
+        -Xms128m -Xmx400m
+        -XX:+UseG1GC
+        -XX:+UseStringDeduplication
+        -XX:MaxMetaspaceSize=128m
+
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/checklist_nasr
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:

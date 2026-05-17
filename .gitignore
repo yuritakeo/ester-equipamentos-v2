@@ -1,0 +1,14 @@
+node_modules/
+Backend/node_modules/
+Backend/.m2/
+Backend/target/
+Backend/backend-run.log
+Backend/backend-run.err.log
+Small_Aldo/node_modules/
+IA_Python/__pycache__/
+Backend/uploads/
+Checklist_equipamentos/dist/
+*.log
+
+
+.vscode/
