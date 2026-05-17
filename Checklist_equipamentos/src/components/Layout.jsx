@@ -4,18 +4,31 @@ import "../components/layout.css";
 import bg from "../assets/Capa_global.png";
 import logo from "../assets/logo-empresas.png";
 import { AuthContext } from "../context/AuthContext";
-import { isAdminLikeRole, normalizeUserRole } from "../utils/userRoles";
 
 export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { usuario, logout } = useContext(AuthContext);
+
   const estoqueVisao = new URLSearchParams(location.search).get("visao") === "locados" ? "locados" : "macro";
   const estoqueMenuAtivo = location.pathname.includes("/painel/estoque");
 
-  // Só ADMIN ou GERENCIA podem ver as outras abas
-  const tipo = normalizeUserRole(usuario?.tipoCategoria);
-  const isAdminOrDev = isAdminLikeRole(tipo);
+  // ✅ NORMALIZADOR LOCAL (substitui utils)
+  const normalizeRole = (tipoUsuario) => {
+    if (!tipoUsuario) return "";
+
+    const tipo = tipoUsuario.toUpperCase();
+
+    if (tipo.includes("ADMIN")) return "ADMIN";
+    if (tipo.includes("GERENCIA")) return "GERENCIA";
+    return "OPERACIONAL";
+  };
+
+  // ✅ usa tipoUsuario correto do backend
+  const role = normalizeRole(usuario?.tipoUsuario);
+
+  // ✅ regra de permissão
+  const isAdminOrDev = role === "ADMIN" || role === "GERENCIA";
 
   useEffect(() => {
     const runPrefetch = () => {
@@ -71,7 +84,6 @@ export default function Layout() {
 
           {isAdminOrDev && (
             <>
-
               <Link
                 to="/painel/equipes-cadastradas"
                 className={location.pathname.includes("equipes-cadastradas") ? "active" : ""}
@@ -87,7 +99,7 @@ export default function Layout() {
                   Estoque Geral
                 </Link>
 
-                <div className="sidebar-submenu" aria-label="Submenu de estoque">
+                <div className="sidebar-submenu">
                   <Link
                     to="/painel/estoque?visao=macro"
                     className={estoqueVisao === "macro" ? "active" : ""}
@@ -102,7 +114,6 @@ export default function Layout() {
                   </Link>
                 </div>
               </div>
-
 
               <Link
                 to="/painel/canteiro"

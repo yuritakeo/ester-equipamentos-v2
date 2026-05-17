@@ -344,9 +344,9 @@ export default function Painel() {
           historico: [],
         })),
     ],
-    (item) => item?.equipamento?.nomeEquipamento,
-    (item) => item?.equipamento?.tagPatrimonio,
-    (item) => item?.equipamento?.empresa?.nome,
+      (item) => item?.equipamento?.nomeEquipamento,
+      (item) => item?.equipamento?.tagPatrimonio,
+      (item) => item?.equipamento?.empresa?.nome,
     )
   ), [equipamentos, equipamentoIdsNaOficina, equipamentosLocados, equipeUsuario, historicoPorEquip, modelosPorEquip]);
   const equipesDestinoDisponiveis = useMemo(() => sortByTextKeys(
@@ -399,9 +399,9 @@ export default function Painel() {
             historico: [],
           })),
       ],
-      (item) => item?.equipamento?.nomeEquipamento,
-      (item) => item?.equipamento?.tagPatrimonio,
-      (item) => item?.equipamento?.empresa?.nome,
+        (item) => item?.equipamento?.nomeEquipamento,
+        (item) => item?.equipamento?.tagPatrimonio,
+        (item) => item?.equipamento?.empresa?.nome,
       ),
     }))
   ), [equipesOperacionaisComLogin, equipamentoIdsNaOficina, equipamentos, equipamentosLocados, historicoPorEquip, modelosPorEquip]);
@@ -1248,7 +1248,7 @@ export default function Painel() {
               <button
                 type="button"
                 className="operacoes-secondary-btn"
-                  onClick={() => { setModalHistoricoEquipe({ open: false, equipe: null }); setFiltrosHistoricoEquipe({ origem: [], equipamento: [], tag: [], destino: [], status: [] }); }}
+                onClick={() => { setModalHistoricoEquipe({ open: false, equipe: null }); setFiltrosHistoricoEquipe({ origem: [], equipamento: [], tag: [], destino: [], status: [] }); }}
               >
                 Fechar
               </button>
@@ -1311,24 +1311,24 @@ export default function Painel() {
                           <td colSpan={9}>{q.secao}</td>
                         </tr>
                       )}
-                        <tr key={q.id}>
-                          <td>{q.item}</td>
-                          <td>{q.descricao}</td>
-                          {weekOrder.map((day, idx) => {
-                            const todayIdx = (new Date().getDay() + 6) % 7;
-                            const payload = weeklyMap.get(day);
-                            const sectionItem = findExecItem(payload, q);
-                            return (
-                              <td
-                                key={`${q.id}-${day}`}
-                                className={idx === todayIdx ? "checklist-admin-today-col" : undefined}
-                              >
-                                <span className={`checklist-admin-cell ${sectionItem?.resposta ? sectionItem.resposta.toLowerCase() : "empty"}`}>
-                                  {sectionItem?.resposta || "-"}
-                                </span>
-                              </td>
-                            );
-                          })}
+                      <tr key={q.id}>
+                        <td>{q.item}</td>
+                        <td>{q.descricao}</td>
+                        {weekOrder.map((day, idx) => {
+                          const todayIdx = (new Date().getDay() + 6) % 7;
+                          const payload = weeklyMap.get(day);
+                          const sectionItem = findExecItem(payload, q);
+                          return (
+                            <td
+                              key={`${q.id}-${day}`}
+                              className={idx === todayIdx ? "checklist-admin-today-col" : undefined}
+                            >
+                              <span className={`checklist-admin-cell ${sectionItem?.resposta ? sectionItem.resposta.toLowerCase() : "empty"}`}>
+                                {sectionItem?.resposta || "-"}
+                              </span>
+                            </td>
+                          );
+                        })}
                       </tr>
                     </Fragment>
                   ))}
